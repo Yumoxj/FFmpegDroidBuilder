@@ -1,0 +1,6 @@
+filegroup {
+  name: "compat-src",
+  srcs: [
+	"compat/strtod.c",
+  ],
+}

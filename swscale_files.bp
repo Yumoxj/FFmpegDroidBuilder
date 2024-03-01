@@ -1,0 +1,53 @@
+filegroup {
+  name: "swrscale-src-arm",
+
+  // ARM 架构代码
+  srcs: [
+	"libswscale/arm/hscale.S",
+    "libswscale/arm/output.S",
+    "libswscale/arm/rgb2yuv_neon_16.S",
+    "libswscale/arm/rgb2yuv_neon_32.S",
+    "libswscale/arm/swscale.c",
+    "libswscale/arm/swscale_unscaled.c",
+    "libswscale/arm/yuv2rgb_neon.S",
+  ],
+}
+
+filegroup {
+  name: "swrscale-src-arm64",
+
+  // ARM64 架构代码
+  srcs: [
+	"libswscale/aarch64/hscale.S",
+    "libswscale/aarch64/output.S",
+    "libswscale/aarch64/rgb2rgb_neon.S",
+    "libswscale/aarch64/rgb2rgb.c",
+    "libswscale/aarch64/swscale.c",
+    "libswscale/aarch64/swscale_unscaled.c",
+    "libswscale/aarch64/yuv2rgb_neon.S",
+  ],
+}
+
+filegroup {
+  name: "swrscale-src-common",
+
+  // 多平台共用代码
+  srcs: [
+	"libswscale/alphablend.c",
+    "libswscale/gamma.c",
+    "libswscale/hscale_fast_bilinear.c",
+    "libswscale/hscale.c",
+    "libswscale/input.c",
+    //"libswscale/log2_tab.c",
+    "libswscale/options.c",
+    "libswscale/output.c",
+    "libswscale/rgb2rgb.c",
+    "libswscale/slice.c",
+    "libswscale/swscale.c",
+    "libswscale/swscale_unscaled.c",
+    "libswscale/utils.c",
+    "libswscale/version.c",
+    "libswscale/vscale.c",
+    "libswscale/yuv2rgb.c",
+  ],
+}

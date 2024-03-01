@@ -1,0 +1,41 @@
+filegroup {
+  name: "swresample-src-arm",
+
+  // ARM 架构代码
+  srcs: [
+	"libswresample/arm/audio_convert_init.c",
+    "libswresample/arm/audio_convert_neon.S",
+    "libswresample/arm/resample_init.c",
+    "libswresample/arm/resample.S",
+  ],
+}
+
+filegroup {
+  name: "swresample-src-arm64",
+
+  // ARM64 架构代码
+  srcs: [
+	"libswresample/aarch64/audio_convert_init.c",
+    "libswresample/aarch64/audio_convert_neon.S",
+    "libswresample/aarch64/resample_init.c",
+    "libswresample/aarch64/resample.S",
+  ],
+}
+
+filegroup {
+  name: "swresample-src-common",
+
+  // 多平台共用代码
+  srcs: [
+	"libswresample/audioconvert.c",
+    "libswresample/dither.c",
+    //"libswresample/log2_tab.c",
+    "libswresample/options.c",
+    "libswresample/rematrix.c",
+    "libswresample/resample_dsp.c",
+    "libswresample/resample.c",
+    "libswresample/swresample_frame.c",
+    "libswresample/swresample.c",
+    "libswresample/version.c",
+  ],
+}
