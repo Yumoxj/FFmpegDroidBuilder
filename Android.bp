@@ -225,3 +225,47 @@ cc_library {
       "-Qunused-arguments",
     ],
 }
+
+cc_binary {
+  name: "ffprobe",
+
+  defaults: ["libFFmpeg_defaults"],
+
+  cflags: [
+    "-Wno-error",
+  ],
+
+  srcs: [
+    "fftools/opt_common.c",
+    "fftools/cmdutils.c",
+    "fftools/ffprobe.c",
+  ],
+
+  shared_libs: [
+    "libFFmpeg",
+  ],
+}
+
+cc_binary {
+  name: "ffmpeg",
+
+  defaults: ["libFFmpeg_defaults"],
+
+  cflags: [
+    "-Wno-error",
+  ],
+
+  srcs: [
+    "fftools/cmdutils.c",
+    "fftools/ffmpeg.c",
+    "fftools/ffmpeg_filter.c",
+    "fftools/ffmpeg_hw.c",
+    "fftools/ffmpeg_mux.c",
+    "fftools/ffmpeg_opt.c",
+    "fftools/opt_common.c",
+  ],
+
+  shared_libs: [
+    "libFFmpeg",
+  ],
+}

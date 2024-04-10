@@ -22,7 +22,7 @@ echo "Compiling FFmpeg for $CPU"
  --disable-doc \
  --enable-ffmpeg \
  --disable-ffplay \
- --disable-ffprobe \
+ --enable-ffprobe \
  --disable-avdevice \
  --disable-symver \
  --enable-cross-compile \
