@@ -17,13 +17,10 @@ echo "Compiling FFmpeg for $CPU"
  --disable-vulkan \
  --disable-gpl \
  --disable-postproc \
- --disable-jni \
- --disable-mediacodec \
- --disable-decoder=h264_mediacodec \
- --disable-static \
+ --enable-jni \
+ --enable-mediacodec \
  --disable-doc \
- --disable-programs \
- --disable-ffmpeg \
+ --enable-ffmpeg \
  --disable-ffplay \
  --disable-ffprobe \
  --disable-avdevice \
@@ -38,6 +35,9 @@ echo "Compiling FFmpeg for $CPU"
  --sysroot=$SYSROOT \
  --extra-cflags="-mno-stackrealign -Os -fpic -mfpu=neon $OPTIMIZE_CFLAGS" \
  --extra-ldflags="$ADDI_LDFLAGS"
+ #--enable-decoder=h264_mediacodec
+ #--disable-ffmpeg
+ #--disable-programs
  #--disable-debug
  #--disable-stripping
  #--disable-linux-perf

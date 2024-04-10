@@ -387,7 +387,7 @@ static int encode_plane(AVCodecContext *avctx, uint8_t *src,
     HuffEntry he[256];
 
     uint32_t offset = 0, slice_len = 0;
-    const int cmask = ~(!plane_no && avctx->pix_fmt == AV_PIX_FMT_YUV420P);
+    const int cmask = ~((!plane_no && avctx->pix_fmt == AV_PIX_FMT_YUV420P) ? 1 : 0);
     int      i, sstart, send = 0;
     int      symbol;
     int      ret;

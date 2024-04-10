@@ -1,47 +1,48 @@
 // 依赖项
 build = [
-    "compat_files.bp",
-    "avutil_files.bp",
-    "avcodec_files.bp",
-    "avformat_files.bp",
-    "swresample_files.bp",
-    "swscale_files.bp",
+  "compat_files.bp",
+  "avutil_files.bp",
+  "avfilter_files.bp",
+  "avcodec_files.bp",
+  "avformat_files.bp",
+  "swresample_files.bp",
+  "swscale_files.bp",
 ]
 
 // 编译选项默认值
 cc_defaults {
-    name: "libFFmpeg_defaults",
-	
-	cflags: [
-		//"-D__ANDROID__",
-        "-DHAVE_AV_CONFIG_H",
-	],
+  name: "libFFmpeg_defaults",
 
-	arch: {
-		arm: {
-		  cflags: [
-			"-DARCH_ARM=1",
-			"-DARCH_AARCH64=0",
-		  ],
-		  
-		  asflags: [
-			"-DARCH_ARM=1",
-			"-DARCH_AARCH64=0",
-		  ],
-		},
+  cflags: [
+    //"-D__ANDROID__",
+    "-DHAVE_AV_CONFIG_H",
+  ],
 
-		arm64: {
-		  cflags: [
-			"-DARCH_AARCH64=1",
-			"-DARCH_ARM=0",
-		  ],
-		  
-		  asflags: [
-			"-DARCH_AARCH64=1",
-			"-DARCH_ARM=0",
-		  ],
-		},
-	},
+  arch: {
+    arm: {
+      cflags: [
+      "-DARCH_ARM=1",
+      "-DARCH_AARCH64=0",
+      ],
+
+      asflags: [
+      "-DARCH_ARM=1",
+      "-DARCH_AARCH64=0",
+      ],
+    },
+
+    arm64: {
+      cflags: [
+      "-DARCH_AARCH64=1",
+      "-DARCH_ARM=0",
+      ],
+
+      asflags: [
+      "-DARCH_AARCH64=1",
+      "-DARCH_ARM=0",
+      ],
+    },
+  },
 }
 
 
@@ -52,8 +53,6 @@ cc_library {
 
     local_include_dirs: [
     ],
-
-    vendor_available: true,
 
     export_include_dirs: [
         ".",
@@ -66,77 +65,80 @@ cc_library {
     // compile_multilib: "64",
 
     arch: {
-        arm: {
-            instruction_set: "arm",
+      arm: {
+        instruction_set: "arm",
 
-            srcs: [
-                ":avutil-src-arm",
-                ":avcodec-src-arm",
-                ":swresample-src-arm",
-                ":swrscale-src-arm",
-            ],
+        srcs: [
+          ":avutil-src-arm",
+          ":avcodec-src-arm",
+          ":avfilter-src-arm",
+          ":swresample-src-arm",
+          ":swrscale-src-arm",
+        ],
 
-            // ARM 架构编译选项
-            cflags: [
-                "-marm",
-                "-mfloat-abi=softfp",
-                "-march=armv7-a",
-                "-mfpu=neon",
-				
-            ],
+        // ARM 架构编译选项
+        cflags: [
+          "-marm",
+          "-mfloat-abi=softfp",
+          "-march=armv7-a",
+          "-mfpu=neon",
+        ],
 
-            // ARM 架构链接选项
-            ldflags: [
-                "-march=armv7-a",
-            ],
+        // ARM 架构链接选项
+        ldflags: [
+          "-march=armv7-a",
+        ],
 
-            // ARM 架构汇编选项
-            asflags: [
-                "-mfloat-abi=softfp",
-                "-march=armv7-a",
-                "-mfpu=neon",
-            ]
-        },
+        // ARM 架构汇编选项
+        asflags: [
+          "-mfloat-abi=softfp",
+          "-march=armv7-a",
+          "-mfpu=neon",
+        ]
+      },
 
-        arm64: {
-            srcs: [
-                ":avutil-src-arm64",
-                ":avcodec-src-arm64",
-                ":swresample-src-arm64",
-                ":swrscale-src-arm64",
-            ],
+      arm64: {
+        srcs: [
+          ":avutil-src-arm64",
+          ":avfilter-src-arm64",
+          ":avcodec-src-arm64",
+          ":swresample-src-arm64",
+          ":swrscale-src-arm64",
+        ],
 
-            // ARM64 架构编译选项
-            cflags: [
-				"-mfpu=neon",
-				"-march=armv8-a",
-            ],
+        // ARM64 架构编译选项
+        cflags: [
+          "-mfpu=neon",
+          "-march=armv8-a",
+        ],
 
-            // ARM64 架构链接选项
-            ldflags: [
-				"-march=armv8-a",
-            ],
+        // ARM64 架构链接选项
+        ldflags: [
+          "-march=armv8-a",
+        ],
 
-            // ARM64 架构汇编选项
-            asflags: [
-				"-march=armv8-a",
-                "-mfpu=neon",
-            ],
-        },
+        // ARM64 架构汇编选项
+        asflags: [
+          "-march=armv8-a",
+          "-mfpu=neon",
+        ],
+      },
     },
 
     srcs: [
-        ":compat-src",
-        ":avutil-src-common",
-        ":avcodec-src-common",
-        ":swresample-src-common",
-        ":swrscale-src-common",
-        ":avformat-src",
+      ":compat-src",
+      ":avutil-src-common",
+      ":avfilter-src-common",
+      ":avcodec-src-common",
+      ":swresample-src-common",
+      ":swrscale-src-common",
+      ":avformat-src",
     ],
 
     shared_libs: [
-		"libz",
-		"libc",
+      "libz",
+      "libc",
+      "libnativehelper",
     ],
 
     static_libs: [
@@ -151,7 +153,7 @@ cc_library {
       "-DPIC",
       "-Dstrtod=avpriv_strtod",
       "-DZLIB_CONST",
-      
+
       // CFLAGS
       "-fno-math-errno",
       "-fno-signed-zeros",
@@ -188,38 +190,38 @@ cc_library {
       "-Wtype-limits",
       "-Wundef",
       "-Wwrite-strings",
-      
+
       // CXXFLAGS
       "-D__STDC_CONSTANT_MACROS",
       "-std=c++11",
-	  
-	  //"-Wl,--gc-sections",
-	  //"-fdata-sections",
-	  //"-ffunction-sections",
-	  //"-flto",
+
+      //"-Wl,--gc-sections",
+      //"-fdata-sections",
+      //"-ffunction-sections",
+      //"-flto",
     ],
 
     // 全局链接选项
     ldflags: [
-		"-Qunused-arguments",
-        "-Wl,--as-needed",
-        "-Wl,--warn-common",
-        "-Wl,-z,noexecstack",
-		
-		"-Wl,-Bsymbolic",
-		//"-Wl,--gc-sections",
-		//"-fdata-sections",
-		//"-ffunction-sections",
-		//"-flto",
+      "-Qunused-arguments",
+      "-Wl,--as-needed",
+      "-Wl,--warn-common",
+      "-Wl,-z,noexecstack",
+
+      "-Wl,-Bsymbolic",
+      //"-Wl,--gc-sections",
+      //"-fdata-sections",
+      //"-ffunction-sections",
+      //"-flto",
     ],
 
     // 全局汇编选项
     asflags: [
-		"-fpic",
-        "-fPIC",
-        "-g",
-        "-mno-stackrealign",
-        "-Os",
-        "-Qunused-arguments",
+      "-fpic",
+      "-fPIC",
+      "-g",
+      "-mno-stackrealign",
+      "-Os",
+      "-Qunused-arguments",
     ],
 }
